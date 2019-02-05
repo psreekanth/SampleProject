@@ -1,4 +1,4 @@
-FROM alpine:edge
-MAINTAINER baeldung.com
-RUN apk add --no-cache openjdk8
-COPY files/UnlimitedJCEPolicyJDK8/* /usr/lib/jvm/java-1.8-openjdk/jre/lib/security/
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
+COPY target/starter-1.0.0.jar app.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]
